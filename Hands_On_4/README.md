@@ -1,9 +1,9 @@
 ## Problem 0: Fibonacci
 #### Function Call Stack for fib(5):
 
-fib(5) -> fib(4) -> fib(3) -> fib(2) -> fib(1) -> fib(0) 
-fib(2) -> fib(1) -> fib(0)
-fib(3) -> fib(2) -> fib(1) -> fib(0)
+fib(5) -> fib(4) -> fib(3) -> fib(2) -> fib(1) -> fib(0)   
+fib(2) -> fib(1) -> fib(0)  
+fib(3) -> fib(2) -> fib(1) -> fib(0)  
 fib(4) -> fib(3) -> fib(2) -> fib(1) -> fib(0)
 
 ## Problem 1: Merging K Sorted Arrays
@@ -16,11 +16,11 @@ The overall time complexity is 𝑂(𝑁 × 𝐾 × log⁡𝐾) as there are a t
 
 #### Possible Improvements:
 
-###### Divide and Conquer Approach:
+##### Divide and Conquer Approach:
 You could divide and conquer by merging arrays two at a time rather than employing a priority queue. The amount of times you merge from K to logK would decrease as a result.
 O(N×KlogK) would still be the time complexity, but because there would be less comparisons made in the heap, it might operate a little bit better in reality.
 
-###### Parallel Processing:
+##### Parallel Processing:
 Performance can be greatly increased by parallelizing the merging procedure across several processors or threads if you are working with very large arrays.You can divide the arrays among multiple threads and merge their results in parallel.
 
 
