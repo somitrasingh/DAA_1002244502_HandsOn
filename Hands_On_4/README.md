@@ -16,16 +16,7 @@ The overall time complexity is 𝑂(𝑁 × 𝐾 × log⁡𝐾) as there are a t
 
 #### Possible Improvements:
 
-##### Divide and Conquer Approach:
-You could divide and conquer by merging arrays two at a time rather than employing a priority queue. The amount of times you merge from K to logK would decrease as a result.
-O(N×KlogK) would still be the time complexity, but because there would be less comparisons made in the heap, it might operate a little bit better in reality.
-
-##### Parallel Processing:
-Performance can be greatly increased by parallelizing the merging procedure across several processors or threads if you are working with very large arrays.You can divide the arrays among multiple threads and merge their results in parallel.
-
-
-##### External Merge Sort:
-An external merge sort can be utilized if the arrays are too big to fit in memory. Parts of the data would be sorted in memory and then combined using a disk-based merge process. Using this will help manage big datasets.
+Implement the min-heap with optimized priority queues or libraries like Python’s heapq. Store only necessary data (e.g., tuples of values and indices) to minimize memory overhead. Merge arrays in batches or use multi-threading to speed up the process. For very large data, use external storage techniques or distributed computing frameworks. Apply adaptive algorithms and in-place merging to reduce unnecessary operations and memory usage.
 
 
 ## Problem 2: Removing Duplicates from a Sorted Array
@@ -34,8 +25,5 @@ We iterate through the array exactly once, comparing each element with its prede
 O(N) where, N is the size of the input array.
 
 #### Possible Improvements:
-##### Memory Usage:
-Currently, the answer changes the input array. For the outcome, you could allocate a new array if memory consumption is not an issue. While code clarity might be enhanced, space complexity would rise from O(1) to O(N).
-
-##### Handling Large Arrays:
-Consider stream processing the array if memory is an issue and you have very big sorted arrays. Rather than putting the entire array into memory at once, you can handle portions of the array one at a time.
+We can modify the original array instead of creating new array it will help to reduce the space complexity and time complexity.
+If the array is already sorted, you could use binary search to find the next unique element, Binary search could be faster for arrays with many duplicates.
