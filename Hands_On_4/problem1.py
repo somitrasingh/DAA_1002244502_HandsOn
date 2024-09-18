@@ -1,6 +1,5 @@
-#Given K sorted arrays of size N each, the task is to merge them all maintaining their sorted order.
 num_arrays = int(input("Enter number of arrays (K) = "))
-num_elements = int(input("Enter number of elements in each array (N) = "))  # N is unused in logic
+num_elements = int(input("Enter number of elements in each array (N) = "))  
 input_arrays = [] 
 combined_array = [] 
 def insertion_sort(arr): 
