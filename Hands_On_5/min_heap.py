@@ -1,135 +1,105 @@
-class MinHeap:
-    def __init__(self, data=[]):
-        self.heap = []
-        if data:
-            self.build_min_heap(data)
+class PriorityHeap:
+    def __init__(self):
+        self.int_items = []  # Heap to store integer values
+        self.float_items = []  # Heap to store float values
 
-    # Get index of the parent node using bitwise operators
-    def parent(self, i):
-        return (i - 1) >> 1  # Equivalent to (i - 1) // 2
+    def get_parent(self, idx):
+        return (idx - 1) >> 1
 
-    # Get index of the left child node using bitwise operators
-    def left(self, i):
-        return (i << 1) + 1  # Equivalent to 2 * i + 1
+    def get_left_child(self, idx):
+        return (idx << 1) + 1
 
-    # Get index of the right child node using bitwise operators
-    def right(self, i):
-        return (i << 1) + 2  # Equivalent to 2 * i + 2
+    def get_right_child(self, idx):
+        return (idx << 1) + 2
 
-    # Heapify the element at index i
-    def heapify(self, i):
-        left = self.left(i)
-        right = self.right(i)
-        smallest = i
+    def add(self, value):
+        if isinstance(value, int):
+            self.int_items.append(value)  # Insert integer into int_items
+            self._move_up(self.int_items, len(self.int_items) - 1)
+        elif isinstance(value, float):
+            self.float_items.append(value)  # Insert float into float_items
+            self._move_up(self.float_items, len(self.float_items) - 1)
 
-        # Check if left child exists and is smaller than current element
-        if left < len(self.heap) and self.heap[left] < self.heap[smallest]:
+    def _move_up(self, heap, idx):
+        while idx > 0 and heap[idx] < heap[self.get_parent(idx)]:
+            parent_idx = self.get_parent(idx)
+            heap[idx], heap[parent_idx] = heap[parent_idx], heap[idx]
+            idx = parent_idx
+
+    def _move_down(self, heap, idx):
+        smallest = idx
+        left = self.get_left_child(idx)
+        right = self.get_right_child(idx)
+
+        if left < len(heap) and heap[left] < heap[smallest]:
             smallest = left
 
-        # Check if right child exists and is smaller than smallest found so far
-        if right < len(self.heap) and self.heap[right] < self.heap[smallest]:
+        if right < len(heap) and heap[right] < heap[smallest]:
             smallest = right
 
-        # If the smallest element is not the parent, swap and heapify the affected sub-tree
-        if smallest != i:
-            self.heap[i], self.heap[smallest] = self.heap[smallest], self.heap[i]
-            self.heapify(smallest)
+        if smallest != idx:
+            heap[idx], heap[smallest] = heap[smallest], heap[idx]
+            self._move_down(heap, smallest)
 
-    # Build the heap using the given data
-    def build_min_heap(self, data):
-        self.heap = data[:]
-        for i in range(len(self.heap) // 2 - 1, -1, -1):
-            self.heapify(i)
+    def build_heap(self, data_list):
+        for item in data_list:
+            self.add(item)
 
-    # Insert a new element into the heap
-    def insert(self, value):
-        self.heap.append(value)
-        i = len(self.heap) - 1
-        # Bubble up the new value to its proper position
-        while i > 0 and self.heap[self.parent(i)] > self.heap[i]:
-            self.heap[i], self.heap[self.parent(i)] = self.heap[self.parent(i)], self.heap[i]
-            i = self.parent(i)
+    def _remove_min(self, heap):
+        min_value = heap[0]
+        last_value = heap.pop()
 
-    # Pop the root node (minimum value) from the heap
-    def pop(self):
-        if len(self.heap) == 0:
-            raise IndexError("Pop from an empty heap")
+        if heap:
+            heap[0] = last_value
+            self._move_down(heap, 0)
 
-        root = self.heap[0]
-        # Replace the root with the last element
-        self.heap[0] = self.heap[-1]
-        self.heap.pop()  # Remove the last element
-        self.heapify(0)  # Restore heap property
-        return root
+        return min_value
 
-    # Peek at the root node without removing it
-    def peek(self):
-        if len(self.heap) == 0:
-            raise IndexError("Peek from an empty heap")
-        return self.heap[0]
+    # Remove the smallest value from the integer heap
+    def remove_min_int(self):
+        if not self.int_items:
+            raise IndexError("Integer heap is empty")
+        return self._remove_min(self.int_items)
 
-    # Check if the heap is empty
-    def is_empty(self):
-        return len(self.heap) == 0
+    # Remove the smallest value from the float heap
+    def remove_min_float(self):
+        if not self.float_items:
+            raise IndexError("Float heap is empty")
+        return self._remove_min(self.float_items)
 
-    # Print the heap (for debugging purposes)
-    def __str__(self):
-        return str(self.heap)
+    # Display the integer and float heaps
+    def print_items(self):
+        print(f"Integer values: {self.int_items}")
+        print(f"Float values: {self.float_items}")
 
-# Example usage:
 
+# Example usage
 if __name__ == "__main__":
-    
-    # Build the heap from a list of integers
-    data = [9, 5, 6, 2, 3, 1, 7]
-    heap = MinHeap(data)
-    print("Example 1:")
-    print("Initial heap:", heap)
+    heap = PriorityHeap()
 
-    # Pop the root node (smallest element)
-    print("Popped element:", heap.pop())
-    print("Heap after pop:", heap)
+    # Build heap from a list of integers and floats
+    data = [3, 2.1, 1, 4.5, 5, 6.3]
+    heap.build_heap(data)
+    print("Heap structure after building:")
+    heap.print_items()
 
-    # Insert new elements
-    heap.insert(4)
-    heap.insert(8)
-    print("Heap after insertions:", heap)
+    # Add a float and an integer
+    heap.add(0.8)
+    print("\nHeap after adding 0.8:")
+    heap.print_items()
 
-    # Peek at the root (minimum element)
-    print("Peek at root:", heap.peek())
+    heap.add(7)
+    print("\nHeap after adding 7:")
+    heap.print_items()
 
-    # Pop all elements to demonstrate functionality
-    while not heap.is_empty():
-        print("Popped element:", heap.pop())
-        print("Heap:", heap)
+    # Remove the smallest integer value
+    removed_int = heap.remove_min_int()
+    print(f"\nRemoved the smallest integer value: {removed_int}")
+    print("\nHeap after removing the smallest integer value:")
+    heap.print_items()
 
-    
-## Example 2 
-    print("Example 2:")
-    # Initial heap construction with integer values
-    data = [15, 5, 20, 1, 17, 10, 30]
-    heap = MinHeap(data)
-    print("Initial heap:", heap)
-
-    # Check if the heap is empty
-    print("Is heap empty?", heap.is_empty())
-
-    # Peek at the root element
-    print("Peek at root:", heap.peek())
-
-    # Insert elements into the heap
-    heap.insert(3)
-    heap.insert(2)
-    print("Heap after insertions (3, 2):", heap)
-
-    # Pop the root (smallest element)
-    print("Popped element:", heap.pop())
-    print("Heap after pop:", heap)
-
-    # Pop all elements and display heap after each pop
-    while not heap.is_empty():
-        print("Popped element:", heap.pop())
-        print("Heap:", heap)
-
-    # Final check if the heap is empty
-    print("Is heap empty?", heap.is_empty())
+    # Remove the smallest float value
+    removed_float = heap.remove_min_float()
+    print(f"\nRemoved the smallest float value: {removed_float}")
+    print("\nHeap after removing the smallest float value:")
+    heap.print_items()
