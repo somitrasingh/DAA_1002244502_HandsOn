@@ -78,18 +78,18 @@ if __name__ == "__main__":
     heap = PriorityHeap()
 
     # Build heap from a list of integers and floats
-    data = [3, 2.1, 1, 4.5, 5, 6.3]
+    data = [4, 3.2, 2, 4.9, 7, 8.1]
     heap.build_heap(data)
     print("Heap structure after building:")
     heap.print_items()
 
     # Add a float and an integer
-    heap.add(0.8)
-    print("\nHeap after adding 0.8:")
+    heap.add(1.3)
+    print("\nHeap after adding 1.3:")
     heap.print_items()
 
-    heap.add(7)
-    print("\nHeap after adding 7:")
+    heap.add(9)
+    print("\nHeap after adding 9:")
     heap.print_items()
 
     # Remove the smallest integer value
