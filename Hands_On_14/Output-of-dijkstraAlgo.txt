@@ -1,0 +1,13 @@
+Shortest distances from 's':
+s: 0
+t: 3
+y: 5
+x: 9
+z: 11
+
+Paths from 's':
+s: s
+t: s -> t
+y: s -> y
+x: s -> t -> x
+z: s -> y -> z
