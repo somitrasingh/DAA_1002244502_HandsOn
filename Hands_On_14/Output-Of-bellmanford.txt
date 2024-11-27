@@ -1,0 +1,12 @@
+(<__main__.Vertex object at 0x0000020B35994A90>, <__main__.Vertex object at 0x0000020B35994AD0>) 6
+(<__main__.Vertex object at 0x0000020B35994A90>, <__main__.Vertex object at 0x0000020B35994D50>) 7
+(<__main__.Vertex object at 0x0000020B35994AD0>, <__main__.Vertex object at 0x0000020B35994B10>) 5
+(<__main__.Vertex object at 0x0000020B35994AD0>, <__main__.Vertex object at 0x0000020B35994D50>) 8
+(<__main__.Vertex object at 0x0000020B35994AD0>, <__main__.Vertex object at 0x0000020B35994F10>) -4
+(<__main__.Vertex object at 0x0000020B35994B10>, <__main__.Vertex object at 0x0000020B35994AD0>) -2
+(<__main__.Vertex object at 0x0000020B35994D50>, <__main__.Vertex object at 0x0000020B35994B10>) -3
+(<__main__.Vertex object at 0x0000020B35994D50>, <__main__.Vertex object at 0x0000020B35994F10>) 9
+(<__main__.Vertex object at 0x0000020B35994F10>, <__main__.Vertex object at 0x0000020B35994A90>) 2
+(<__main__.Vertex object at 0x0000020B35994F10>, <__main__.Vertex object at 0x0000020B35994B10>) 7
+10
+True
